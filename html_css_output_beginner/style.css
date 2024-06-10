@@ -1,0 +1,132 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: rgb(83, 78, 78);
+}
+
+.container {
+    width: 960px;
+    padding: 0% 4%;
+    margin: 0 auto;
+}
+
+.header {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav a{
+    text-decoration: none;
+}
+
+.title{
+    padding: 2px 15px;
+    font-size: 25px;
+    color: white;
+    background-color: rgb(26, 30, 81);
+}
+
+.header ul{
+    display: flex;
+    list-style: none;
+}
+
+.header ul li {
+    margin: 0px 10px;
+    font-size: 15px;
+}
+
+.main-img {
+    height: 600px;
+    width: 100vw;
+    position: relative;
+    left: 50%; 
+    transform: translateX(-50%);
+    margin-top: 10px;
+}
+
+.main{
+    width: 100%;
+    margin-top: 50px;
+}
+
+#introduction {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.content-title{
+    display: inline-block;
+    border-bottom: 1px solid black;
+}
+
+#introduction section {
+    margin-top: 40px;
+    display: flex;
+    align-items: end;
+    gap: 90px;
+}
+.content-text{
+    margin-top: 5px;
+}
+
+.introduction-img{
+    height: 120px;
+    border-radius: 50%;
+}
+
+#profile{
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-item-content{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.profile-item{
+    margin-top: 40px;
+    width: 30%;
+    height: 240px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.profile-img{
+    object-fit: cover; 
+    width: 100%;
+    height: 175px;
+}
+
+.footer{
+    margin-top: 80px;
+    text-align: center;
+}
+
+
+@media (max-width: 600px) {
+    .container{
+        width: 100%;
+    }
+    .introduction section, .profile-item-content {
+        width: 400px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .profile-item{
+        width: 100%;
+    }
+}
