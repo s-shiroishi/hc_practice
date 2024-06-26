@@ -24,19 +24,11 @@ class Grouping:
         self.grouped_groups.append(list(set(self.group.members) - set(new_group)))
         return self.grouped_groups
 
-class PrintGroups:
-    groups = None
-
-    @classmethod
-    def initialize(cls, members: list[str]):
-        cls.groups = Grouping(Group(members)).grouping()
-
-    @classmethod
-    def print(cls):
-        for group in cls.groups:
-            sorted_group = sorted(group)
-            print(sorted_group)
+def initialize_and_print_groups(members: list[str]):
+    groups = Grouping(Group(members)).grouping()
+    for group in groups:
+        sorted_group = sorted(group)
+        print(sorted_group)
 
 if __name__ == '__main__':
-    PrintGroups.initialize(['A', 'B', 'C', 'D', 'E', 'F'])
-    PrintGroups.print()
+    initialize_and_print_groups(['A', 'B', 'C', 'D', 'E', 'F'])
