@@ -13,6 +13,10 @@ class Grouping:
         size = random.choice([2, 3])
         group_a = random.sample(self.members, size)
         group_b = [member for member in self.members if member not in group_a]
+
+        if len(group_a) + len(group_b) != 6:
+            raise ValueError('グループ分けに失敗しました。')
+        
         return   group_a, group_b
 
 def initialize_and_print_groups(members: list[str]):
