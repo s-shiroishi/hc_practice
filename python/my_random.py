@@ -1,31 +1,22 @@
 import random 
 
-class Group:
+class Grouping:
     def __init__(self, members: list[str]):
         if not isinstance(members, list):
             raise ValueError('グループはリスト形式で指定してください。')
         if len(members) != 6:
             raise ValueError('グループは6人でなければなりません。')
         self.members = members
-
-class Grouping:
-    def __init__(self, group: Group):
-        self.group = group
-        self.grouped_groups = []
     
-    def _select_grouping_members(self):
-        size = 3 if random.random() > 0.5 else 2
-        return random.sample(range(len(self.group.members)), size)
     
-    def grouping(self):
-        selected_members = self._select_grouping_members() 
-        new_group = [self.group.members[person] for person in selected_members]
-        self.grouped_groups.append(new_group)
-        self.grouped_groups.append(list(set(self.group.members) - set(new_group)))
-        return self.grouped_groups
+    def divide_group(self) -> tuple[list[str], list[str]]:
+        size = random.choice([2, 3])
+        group_a = random.sample(self.members, size)
+        group_b = [member for member in self.members if member not in group_a]
+        return   group_a, group_b
 
 def initialize_and_print_groups(members: list[str]):
-    groups = Grouping(Group(members)).grouping()
+    groups = Grouping(members).divide_group()
     for group in groups:
         sorted_group = sorted(group)
         print(sorted_group)
