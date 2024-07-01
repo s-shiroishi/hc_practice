@@ -3,9 +3,9 @@ import sys
 
 #特定の年月の日数と1日の曜日を管理
 class DateManager:
-    def __init__(self, month: int, year: int):
-        self.month = month
+    def __init__(self, year: int, month: int):
         self.year = year
+        self.month = month
 
     @property
     def current_month_start(self) -> datetime:
@@ -24,8 +24,8 @@ class DateManager:
         return self.current_month_start.weekday()
 
 class Calendar:
-    def __init__(self, month: int, year: int):
-        dateManager = DateManager(month, year)
+    def __init__(self, year: int, month: int):
+        dateManager = DateManager(year, month)
         self.title = f'{dateManager.month}月 {dateManager.year}'.center(20) 
         self.week = ' '.join(['月', '火', '水', '木', '金', '土', '日'])
         self.first_weekday = dateManager.first_weekday
@@ -45,18 +45,16 @@ class Calendar:
         return self.title + '\n' + self.week + days_str
         
 
-def view_calendar(month: int, year: int):
-    calendar = Calendar(month, year).create()
+def view_calendar(year: int, month: int):
+    calendar = Calendar(year, month).create()
     print(calendar)
 
 def parse_arguments():
     if len(sys.argv) not in [1, 3]:
         print("使用方法: python calendar.py -m <月>")
         sys.exit(1)
-    year = datetime.now().year
     if len(sys.argv) == 1:
-        month = datetime.now().month
-        return view_calendar(month, year)
+        return datetime.now().month
     if len(sys.argv) == 3 and sys.argv[1] == '-m':
         try: 
             month = int(sys.argv[2])
@@ -65,10 +63,12 @@ def parse_arguments():
         except ValueError as e:
             print(f"{e}")
             sys.exit(1)
-        return view_calendar(month, year)
+        return month
     else:
         print("使用方法: python calendar.py -m <月>")
         sys.exit(1)
 
 if __name__ == '__main__':
-    parse_arguments()
+    year = datetime.now().year
+    month = parse_arguments()
+    view_calendar(year, month)
