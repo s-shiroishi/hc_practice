@@ -1,0 +1,89 @@
+title {label: "Twitter Clone Entity-Relationship Diagram", size: "20"}
+# Entities
+[signup_emails] {bgcolor: "#d0e0d0"}
+  *id {label: "int, not null"}
+  email {label: "varchar, not null, uniq"}
+  created_at {label: "datetime, not null"}
+  updated_at {label: "datetime, not null"}
+
+[users] {bgcolor: "#d0e0d0"}
+  *id {label: "int, not null"}
+  signup_email_id {label: "bigint, not null, FK(signup_emails)"}
+  user_name {label: "varchar, uniq"}
+  phone_number {label: "varchar, uniq"}
+  display_name {label: "varchar"}
+  bio {label: "varchar"}
+  location {label: "varchar"}
+  website {label: "varchar"}
+  birth_date {label: "datetime"}
+  profile_image {label: "varchar"}
+  avatar_image {label: "varchar"}
+  created_at {label: "datetime, not null"}
+  updated_at {label: "datetime, not null"}
+
+[tweets] {bgcolor: "#ececfc"}
+  *id {label: "int, not null"}
+  user_id {label: "bigint, not null, FK(users)"}
+  content {label: "varchar"}
+  created_at {label: "datetime, not null"}
+  updated_at {label: "datetime, not null"}
+
+[tweet_likes] {bgcolor: "#ececfc"}
+  *id {label: "int, not null"}
+  user_id {label: "bigint, not null, FK(users)"}
+  tweet_id {label: "bigint, not null, FK(tweets)"}
+  created_at {label: "datetime, not null"}
+  updated_at {label: "datetime, not null"}
+
+[retweets] {bgcolor: "#ececfc"}
+  *id {label: "int, not null"}
+  user_id {label: "bigint, not null, FK(users)"}
+  tweet_id {label: "bigint, not null, FK(tweets)"}
+  retweet_content {label: "varchar"}
+  created_at {label: "datetime, not null"}
+  updated_at {label: "datetime, not null"}
+
+[user_follows] {bgcolor: "#fcecec"}
+  *id {label: "int, not null"}
+  follower_id {label: "bigint, not null, FK(users)"}
+  followed_id {label: "bigint, not null, FK(users)"}
+  created_at {label: "datetime, not null"}
+  updated_at {label: "datetime, not null"}
+
+[direct_messages] {bgcolor: "#fcecec"}
+  *id {label: "int, not null"}
+  sender_id {label: "bigint, not null, FK(users)"}
+  recipient_id {label: "bigint, not null, FK(users)"}
+  message_content {label: "varchar"}
+  created_at {label: "datetime, not null"}
+  updated_at {label: "datetime, not null"}
+
+[notifications] {bgcolor: "#fcecec"}
+  *id {label: "int, not null"}
+  user_id {label: "bigint, not null, FK(users)"}
+  notification_type {label: "varchar"}
+  is_read {label: "boolean"}
+  created_at {label: "datetime, not null"}
+  updated_at {label: "datetime, not null"}
+
+[bookmarks] {bgcolor: "#fcecec"}
+  *id {label: "int, not null"}
+  user_id {label: "bigint, not null, FK(users)"}
+  tweet_id {label: "bigint, not null, FK(tweets)"}
+  created_at {label: "datetime, not null"}
+  updated_at {label: "datetime, not null"}
+
+# Relationships
+signup_emails  1--* users
+users          1--* tweets
+users          1--* tweet_likes
+users          1--* retweets
+users          1--* user_follows {label: "follower"}
+users          1--* user_follows {label: "followed"}
+users          1--* direct_messages {label: "sender"}
+users          1--* direct_messages {label: "recipient"}
+users          1--* notifications
+users          1--* bookmarks
+tweets         1--* tweet_likes
+tweets         1--* retweets
+tweets         1--* bookmarks
